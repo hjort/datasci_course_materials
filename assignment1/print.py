@@ -1,16 +1,21 @@
 #!/usr/bin/python
 
+# Problem 0: Query Twitter with Python
+
 import urllib
 import json
 import re
 
+# TODO: retrieve from command arguments
+term = "microsoft"
+
 page = 0
-while page in range(0,10):
+while page in range(0, 10):
 
         page += 1
         #print page
 
-        response = urllib.urlopen("http://search.twitter.com/search.json?q=microsoft&page=" + str(page))
+        response = urllib.urlopen("http://search.twitter.com/search.json?q=" + term + "&page=" + str(page))
         dict = json.load(response)
 
         results = dict['results']
