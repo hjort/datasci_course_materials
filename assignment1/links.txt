@@ -1,0 +1,8 @@
+https://class.coursera.org/datasci-001/assignment/view?assignment_id=3
+
+https://dev.twitter.com/docs/platform-objects/tweets
+
+http://docs.python.org/2/library/stdtypes.html
+http://docs.python.org/2/library/json.html
+http://docs.python.org/2/library/re.html
+
