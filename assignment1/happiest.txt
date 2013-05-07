@@ -1,0 +1,172 @@
+0	Pearland, TX
+-1	Fayetteville, AR
+-3	Fairfield, CA
+0	Athens, GA
+1	Silver Springs Shores, FL
+-2	Gonzalez, FL
+3	Seneca, SC
+-2	Los Angeles, CA
+0	Indiana, PA
+2	Kenosha, WI
+0	Columbus, GA
+0	Pennsauken, NJ
+0	Clarksville, TN
+0	Texas, US
+0	East Chicago, IN
+0	Muncie, IN
+-4	Augusta, GA
+0	Lower Allen, PA
+2	Hermitage, PA
+3	Little Egg Harbor, NJ
+-3	Triangle, NY
+0	Village Green-Green Ridge, PA
+0	Los Angeles, CA
+4	San Ramon, CA
+1	San Jose, CA
+1	Lewiston, ME
+4	Florida, US
+0	Manorville, NY
+2	La Porte, TX
+2	Gainesville, FL
+0	Moreno Valley, CA
+1	St. Petersburg, FL
+0	Newberry, PA
+2	Victoria, TX
+0	Leisure City, FL
+-2	Battle Creek, MI
+-3	Ohio, US
+-3	Wayne, VA
+3	Higgins, MI
+-4	Walled Lake, MI
+6	Clover Hill, VA
+0	Poquoson, VA
+0	South Carolina, US
+0	Miami, FL
+3	East Murray, OK
+-6	Niles, OH
+-7	Tallmadge, OH
+2	Maumelle, AR
+0	Texas, US
+-7	College Park, GA
+3	Casper, WY
+1	Mastic, NY
+0	Plymouth, NH
+0	Kawela Bay, HI
+-2	Madison, WI
+2	Bailey's Crossroads, VA
+-2	Wichita, KS
+-2	Johnston, RI
+2	Boaz, AL
+0	Georgia, US
+3	Minot, ND
+0	Cranston, RI
+-2	Youngstown, OH
+5	Madison, MS
+-1	New Chicago, IN
+1	Dallas, TX
+0	Allen, IN
+0	Saluda, SC
+1	Georgia, US
+0	Biloxi, MS
+1	Broken Arrow, OK
+4	La Porte, TX
+0	Albuquerque, NM
+6	South Carolina, US
+3	Queens, NY
+0	Philadelphia, PA
+5	Gardendale, AL
+0	Baton Rouge, LA
+1	Cross Creek, NC
+0	Scranton, PA
+1	Georgia, US
+-3	Georgia, US
+1	Westlake, OH
+5	Elk Grove Village, IL
+-7	Chandler, AZ
+1	Buffalo, MN
+0	Houston, TX
+0	Sharps Chapel, TN
+3	North Carolina, US
+-4	Shoreview, MN
+0	Durham, NC
+0	Henderson, NV
+-3	South Carolina, US
+-3	Chandler, AZ
+0	Georgia, US
+-3	Coral Springs, FL
+2	Terrace Heights, WA
+0	Montgomery, AL
+5	South Carolina, US
+0	Griffith, IN
+-5	Randolph, NJ
+0	Canyon, TX
+0	Baltimore, MD
+4	Indianapolis, IN
+3	Hattiesburg, MS
+3	Brockport, NY
+0	Charlotte, NC
+5	Syracuse, NY
+0	Manchester-by-the-Sea, MA
+3	Clinton, IA
+-1	Florida, US
+0	West End, NY
+2	Muskegon, MI
+0	Laredo, TX
+4	Manhattan, KS
+-2	Philadelphia, PA
+0	Miami Springs, FL
+2	Robstown, TX
+1	Taunton, MA
+1	Pittsfield, MA
+3	New York, NY
+0	Paterson, NJ
+0	Gainesville, GA
+-2	Pelham, NY
+0	Sacramento, CA
+0	Henderson, TX
+-2	Hamden, CT
+1	Walnut, AR
+6	Banning, CA
+2	Sewall's Point, FL
+0	Atlantic City, NJ
+3	Portage, MI
+7	Twentynine Palms Base, CA
+0	Taylor, MI
+0	Stockton, CA
+0	Middleton, OH
+3	Newark, NJ
+0	Crown City, OH
+3	Ohio, US
+2	Mebane, NC
+-1	Winnsboro, LA
+2	Statesboro, GA
+2	Mount Pleasant, MI
+0	Virden, IL
+2	Greenwood, IN
+-7	Wixom, MI
+2	Coral Springs, FL
+3	Texas, US
+0	St. Joseph, IN
+-4	Hockessin, DE
+6	Columbus, OH
+0	Queens, NY
+2	Fort Worth, TX
+0	Indio, CA
+2	West Mifflin, PA
+-1	Kentucky, US
+0	Bel Air South, MD
+-4	Chattanooga, TN
+0	Georgia, US
+0	Fort Washington, MD
+12	Providence, RI
+2	Sullivan, MO
+0	Breckenridge, CO
+4	Lansdowne-Baltimore Highlands, MD
+0	Wintersville, OH
+0	Prior Lake, MN
+-7	Sandusky, OH
+-3	Portsmouth, VA
+-2	Montgomery, AL
+0	Abilene, TX
+0	Sallisaw, OK
+0	Coconino, AZ
