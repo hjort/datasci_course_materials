@@ -1,5 +1,8 @@
+#!/usr/bin/python
+
 # Problem 2: Derive the sentiment of each tweet
-# python tweet_sentiment.py AFINN-111.txt output.txt | less
+# Usage: python tweet_sentiment.py <sentiment_file> <tweet_file>
+# Sample: ./tweet_sentiment.py AFINN-111.txt output.txt | less
 
 import sys
 import json

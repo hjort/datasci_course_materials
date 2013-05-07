@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 # Problem 0: Query Twitter with Python
+# Usage: python print.py
 
 import urllib
 import json
