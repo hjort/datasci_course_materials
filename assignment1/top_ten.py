@@ -46,15 +46,21 @@ def read_tweets(fp):
 '''
 print all hashtags found and their number of occurrencies
 '''
-def print_tags_count():
-	for tag, count in tags.iteritems():
-		print "%s %.1f" % (tag, count)
+def print_tags_count(max):
+	c = 0
+	for w in sorted(tags, key = tags.get, reverse = True):
+		print w, tags[w]
+		c += 1
+		if c > max:
+			break
+	#for tag, count in tags.iteritems():
+		#print "%s %.1f" % (tag, count)
 		#print "%d\t%s" % (count, tag)
 
 def main():
 	tweet_file = open(sys.argv[1])
 	read_tweets(tweet_file)
-	print_tags_count()
+	print_tags_count(10)
 
 if __name__ == '__main__':
 	main()
