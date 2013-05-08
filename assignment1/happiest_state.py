@@ -52,24 +52,29 @@ def read_tweets(fp):
 
 				if cc == 'US':
 
-					# TODO: "Springs Shores, FL" => "FL"
-					#state = pfn.getstate()
-					#if state not in states:
-					#	states[state] = 0
-					#states[state] += score
+					# retrieve the state code
+					sc = pfn[pfn.rfind(", ") + 2 : ]
+					if sc not in states:
+						states[sc] = 0
+					states[sc] += score
 
-					print "%d\t%s" % (score, pfn)
+					#print "%d\t%s" % (score, pfn)
 
 				#print "%d: %s => %s" % (score, text, norm)
 		count += 1
 		#if count > 100:
 		#	break 
 
+def print_state_scores():
+	for state, score in states.iteritems():
+		print "%s %d" % (state, score)
+
 def main():
 	sent_file = open(sys.argv[1])
 	tweet_file = open(sys.argv[2])
 	build_dict(sent_file)
 	read_tweets(tweet_file)
+	print_state_scores()
 
 if __name__ == '__main__':
 	main()
