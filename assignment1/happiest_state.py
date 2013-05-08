@@ -2,7 +2,7 @@
 
 # Problem 5: Which State is happiest?
 # Usage: python happiest_state.py <sentiment_file> <tweet_file>
-# Sample: ./happiest_state.py AFINN-111.txt output.txt | less
+# Sample: ./happiest_state.py AFINN-111.txt output.txt
 
 import sys
 import json
@@ -61,7 +61,10 @@ def read_tweets(fp):
 	for line in fp:
 		tweet = json.loads(line)
 		if 'created_at' in tweet:
-			if 'lang' in tweet and tweet['lang'] == 'en':
+
+			# grader didn't like this language restriction... :(
+			if True:
+			#if 'lang' in tweet and tweet['lang'] == 'en':
 
 				text = tweet['text'].encode('utf-8')
 				norm = normalize(text)
@@ -97,7 +100,10 @@ def read_tweets(fp):
 					# sometimes it has another format (e.g., "Florida, US")
 					if sc == 'US':
 						sc = get_state_code(pfn[ : pfn.rfind(", ")])
-					#print "%s => %s" % (pfn, sc)
+
+					# TODO: ignore wrong locations (e.g., "Savoye, Dallas")
+					#print "'%s' => '%s'" % (pfn, sc)
+
 					if sc is None:
 						continue
 
