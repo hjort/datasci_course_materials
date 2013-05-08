@@ -38,7 +38,7 @@ def read_tweets(fp):
 
 def print_tags_count():
 	for tag, count in tags.iteritems():
-		print "%s %f" % (tag, count)
+		print "%s %.1f" % (tag, count)
 		#print "%d\t%s" % (count, tag)
 
 def main():
