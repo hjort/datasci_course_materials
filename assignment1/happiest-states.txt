@@ -2,14 +2,14 @@ WA 2
 DE -4
 WI 0
 HI 0
-FL 3
+FL 6
 WY 3
 NH 0
 NJ 1
 NM 0
-TX 13
+TX 16
 LA -1
-NC 3
+NC 6
 ND 3
 TN -4
 NY 10
@@ -22,7 +22,7 @@ CA 13
 AL 5
 AR 2
 IL 5
-GA -9
+GA -10
 IN 5
 IA 3
 MA 2
@@ -35,7 +35,7 @@ OH -15
 MO 2
 MN -3
 MI -3
-US 15
 KS 2
 MS 8
-SC 3
+SC 11
+KY -1
