@@ -20,6 +20,7 @@ def read_tweets(fp):
 	for line in fp:
 		tweet = json.loads(line)
 		if 'created_at' in tweet:
+
 			text = tweet['text'].encode('utf-8')
 			norm = normalize(text)
 
