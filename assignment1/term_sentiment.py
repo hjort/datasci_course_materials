@@ -24,11 +24,17 @@ stop_list = [
 	"they", "him"
 ];
 
+'''
+build dictionary from affin file
+'''
 def build_dict(afinnfile):
 	for line in afinnfile:
 		term, score = line.split("\t") # the file is tab-delimited
 		old_dict[term] = int(score)    # convert the score to an integer
 
+'''
+normalize the given text
+'''
 def normalize(text):
 	# awk '{print$1}' AFINN-111.txt | sed 's/[a-z]\+//g' | sort -u
 	return re.sub('[^a-z0-9 -]', '', text.lower())
@@ -36,12 +42,16 @@ def normalize(text):
 #def lines(fp):
 #	print str(len(fp.readlines()))
 
+'''
+process the tweets in the JSON file
+'''
 def read_tweets(fp):
-	count = 0
+	#count = 0
 	for line in fp:
 		tweet = json.loads(line)
 		if 'created_at' in tweet:
 			if 'lang' in tweet and tweet['lang'] == 'en':
+
 				text = tweet['text'].encode('utf-8')
 				norm = normalize(text)
 
@@ -86,6 +96,9 @@ def read_tweets(fp):
 		#if count > 1000:
 		#	break
 
+'''
+print new terms found and their scores
+'''
 def print_new_dict():
 	for term, score in new_dict.iteritems():
 		print "%s %.3f" % (term, score)

@@ -8,15 +8,21 @@ import sys
 import json
 import re
 
-tags = {}
+tags = {} # dict to hold hashtags
 
+'''
+normalize the given text
+'''
 def normalize(text):
 	# awk '{print$1}' AFINN-111.txt | sed 's/[a-z]\+//g' | sort -u
 	return re.sub('[^a-z0-9 #-]', '', text.lower())
 	#return text.lower()
 
+'''
+process the tweets in the JSON file
+'''
 def read_tweets(fp):
-	count = 0
+	#count = 0
 	for line in fp:
 		tweet = json.loads(line)
 		if 'created_at' in tweet:
@@ -24,7 +30,7 @@ def read_tweets(fp):
 			text = tweet['text'].encode('utf-8')
 			norm = normalize(text)
 
-			# retrieve tags in the tweet
+			# retrieve hashtags in the tweet
 			for token in norm.split():
 				if token[0] == '#' and len(token) > 2:
 					tag = token[1:]
@@ -33,10 +39,13 @@ def read_tweets(fp):
 					tags[tag] += 1.0
 					#print token
 
-		count += 1
+		#count += 1
 		#if count > 100:
 		#	break 
 
+'''
+print all hashtags found and their number of occurrencies
+'''
 def print_tags_count():
 	for tag, count in tags.iteritems():
 		print "%s %.1f" % (tag, count)

@@ -10,12 +10,18 @@ import re
 
 terms = {} # initialize an empty dictionary
 
+'''
+normalize the given text
+'''
 def normalize(text):
 	# awk '{print$1}' AFINN-111.txt | sed 's/[a-z]\+//g' | sort -u
 	return re.sub('[^a-z0-9 -]', '', text.lower())
 
+'''
+process the tweets in the JSON file
+'''
 def read_tweets(fp):
-	count = 0
+	#count = 0
 	for line in fp:
 		tweet = json.loads(line)
 		if 'created_at' in tweet:
@@ -24,6 +30,7 @@ def read_tweets(fp):
 				text = tweet['text'].encode('utf-8')
 				norm = normalize(text)
 
+				# increment the count of the given term in the dict
 				for word in norm.split():
 					if len(word) > 1:
 						if word not in terms:
@@ -35,6 +42,9 @@ def read_tweets(fp):
 		#if count > 1000:
 		#	break
 
+'''
+print the histogram of found terms
+'''
 def print_terms_frequency():
 
 	# count number of occurrences of all terms in all tweets
