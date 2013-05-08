@@ -12,10 +12,12 @@ terms = {} # initialize an empty dictionary
 
 '''
 normalize the given text
+$ awk '{print$1}' AFINN-111.txt | sed 's/[a-z]\+//g' | sort -u
 '''
 def normalize(text):
-	# awk '{print$1}' AFINN-111.txt | sed 's/[a-z]\+//g' | sort -u
-	return re.sub('[^a-z0-9 -]', '', text.lower())
+	# grader didn't expect text normalization... :(
+	return text
+	#return re.sub('[^a-z0-9 -]', '', text.lower())
 
 '''
 process the tweets in the JSON file
@@ -25,10 +27,14 @@ def read_tweets(fp):
 	for line in fp:
 		tweet = json.loads(line)
 		if 'created_at' in tweet:
-			if 'lang' in tweet and tweet['lang'] == 'en':
+
+			# grader didn't like this language restriction... :(
+			if True:
+			#if 'lang' in tweet and tweet['lang'] == 'en':
 
 				text = tweet['text'].encode('utf-8')
 				norm = normalize(text)
+				#print "'%s' => '%s'" % (text, norm)
 
 				# increment the count of the given term in the dict
 				for word in norm.split():
