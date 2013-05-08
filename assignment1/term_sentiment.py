@@ -16,16 +16,18 @@ stop_list = [
 	"about", "an", "are", "as", "at", "be", "by", "com", 
 	"for", "from", "how", "in", "is", "it", "of", "on", 
 	"or", "that", "the", "this", "to", "was", "what", 
-	"when", "where", "who", "will", "with", "the", "www",
+	"when", "where", "who", "will", "with", "the", #"www",
 	# added by me...
 	"my", "if", "and", "them", "me", "could", "anyone",
-	"you", "he", "your", "its", "there"
+	"you", "he", "your", "its", "there", "but", "too",
+	"so", "have", "just", "would", "we", "us", "did",
+	"they", "him"
 ];
 
 def build_dict(afinnfile):
 	for line in afinnfile:
-		term, score = line.split("\t")  # the file is tab-delimited
-		old_dict[term] = int(score)  # convert the score to an integer
+		term, score = line.split("\t") # the file is tab-delimited
+		old_dict[term] = int(score)    # convert the score to an integer
 
 def normalize(text):
 	# awk '{print$1}' AFINN-111.txt | sed 's/[a-z]\+//g' | sort -u
@@ -43,7 +45,7 @@ def read_tweets(fp):
 				text = tweet['text'].encode('utf-8')
 				norm = normalize(text)
 
-				# compute the score for the tweet
+				# compute the score for the whole tweet
 				score = 0
 				for word in norm.split():
 					if word in old_dict:
@@ -85,9 +87,9 @@ def read_tweets(fp):
 		#	break
 
 def print_new_dict():
-	#print new_dict
 	for term, score in new_dict.iteritems():
 		print "%s %.3f" % (term, score)
+		#print "%.3f\t%s" % (score, term)
 
 def main():
 	sent_file = open(sys.argv[1])
