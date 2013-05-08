@@ -8,16 +8,15 @@ import sys
 import json
 import re
 
-sent_dict = {}
+sent_dict = {} # initialize an empty dictionary
 
 def lines(fp):
 	print str(len(fp.readlines()))
 
 def build_dict(afinnfile):
-	#sent_dict = {} # initialize an empty dictionary
 	for line in afinnfile:
-		term, score  = line.split("\t")  # the file is tab-delimited
-		sent_dict[term] = int(score)  # convert the score to an integer
+		term, score = line.split("\t") # the file is tab-delimited
+		sent_dict[term] = int(score)   # convert the score to an integer
 	#print sent_dict.items() # print every (term, score) pair in the dictionary
 
 def normalize(text):
@@ -27,22 +26,19 @@ def normalize(text):
 def read_tweets(fp):
 	count = 0
 	for line in fp:
-		#print line
 		tweet = json.loads(line)
-		#print tweet
 		if 'created_at' in tweet:
 			if 'lang' in tweet and tweet['lang'] == 'en':
+
 				text = tweet['text'].encode('utf-8')
-				#print text
 				norm = normalize(text)
-				#print norm
+				
 				score = 0
 				for word in norm.split():
-					#print sent_dict
 					if word in sent_dict:
 						score += sent_dict[word]
-						#print word
 				print score
+
 				#print "%d: %s => %s" % (score, text, norm)
 		count += 1
 		#if count > 100:
@@ -53,8 +49,6 @@ def main():
 	tweet_file = open(sys.argv[2])
 	build_dict(sent_file)
 	read_tweets(tweet_file)
-	#lines(sent_file)
-	#lines(tweet_file)
 
 if __name__ == '__main__':
 	main()
