@@ -8,4 +8,3 @@ heatnation 28.0
 sucre 28.0
 oomf 27.0
 bulls 27.0
-heatvbulls 27.0
