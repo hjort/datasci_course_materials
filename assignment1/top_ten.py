@@ -28,17 +28,29 @@ def read_tweets(fp):
 		tweet = json.loads(line)
 		if 'created_at' in tweet:
 
-			text = tweet['text'].encode('utf-8')
-			norm = normalize(text)
-
-			# retrieve hashtags in the tweet
-			for token in norm.split():
-				if token[0] == '#' and len(token) > 2:
-					tag = token[1:]
+			# extract hashtags from the JSON object!
+			entities = tweet['entities']
+			hashtags = entities['hashtags']
+			if hashtags:
+				for hashtag in hashtags:
+					tag = hashtag['text']
 					if tag not in tags:
 						tags[tag] = 0.0
 					tags[tag] += 1.0
-					#print token
+					#print tag
+
+			# we should not be parsing the "text" field... :(
+			#text = tweet['text'].encode('utf-8')
+			#norm = normalize(text)
+
+			# retrieve hashtags in the tweet
+			#for token in norm.split():
+			#	if token[0] == '#' and len(token) > 2:
+			#		tag = token[1:]
+			#		if tag not in tags:
+			#			tags[tag] = 0.0
+			#		tags[tag] += 1.0
+			#		#print token
 
 		#count += 1
 		#if count > 100:
