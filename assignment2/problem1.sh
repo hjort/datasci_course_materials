@@ -39,7 +39,7 @@ runsql "$sql" > count.data
 countsql "$sql" > count.txt
 
 # (e) big documents Write a SQL statement to find all documents that have more than 300 total terms, including duplicate terms.
-sql="SELECT a.docid FROM frequency a JOIN frequency b ON (a.docid = b.docid) WHERE a.term = 'transactions' AND b.term = 'world'"
+sql="SELECT docid, sum(count) FROM frequency GROUP BY docid HAVING sum(count) > 300"
 echo "e) $sql"
 runsql "$sql" > big_documents.data
 countsql "$sql" > big_documents.txt
