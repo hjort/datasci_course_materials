@@ -24,6 +24,21 @@ echo "b) $sql"
 runsql "$sql" > select_project.data
 countsql "$sql" > select_project.txt
 
+# (c) union: Write a SQL statement that is equivalent to the following relational algebra expression.
+sql="SELECT term FROM frequency WHERE docid = '10398_txt_earn' AND count = 1
+UNION
+SELECT term FROM frequency WHERE docid = '925_txt_trade' AND count = 1"
+echo "c) $sql"
+runsql "$sql" > union.data
+countsql "$sql" > union.txt
+
+# (d) count: Write a SQL statement to count the number of documents containing the word “parliament”
+sql="SELECT count FROM frequency WHERE term = 'parliament'"
+echo "d) $sql"
+runsql "$sql" > count.data
+countsql "$sql" > count.txt
+
+
 echo
 echo "Showing results..."
 head *.{txt,data}
