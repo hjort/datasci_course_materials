@@ -1,0 +1,34 @@
+http://stackoverflow.com/questions/3903817/pull-new-updates-from-original-github-repository-into-forked-github-repository
+
+Pull new updates from original Github repository into forked Github repository
+------------------------------------------------------------------------------
+
+I forked someone's repository on Github and would like to update my version with commits and updates made in the original repo. These were made after I forked my copy.
+
+How can I pull in the changes that were made in the origin and incorporate them into my repo?
+
+    Once the clone is complete your repo will have a remote named “origin” that points to your fork on GitHub.
+    Don’t let the name confuse you, this does not point to the original repo you forked from. To help you keep track of that repo we will add another remote named “upstream”:
+
+$ cd github-services
+$ git remote add upstream git://github.com/pjhyett/github-services.git
+$ git fetch upstream
+
+# then: (like "git pull" which is fetch + merge)
+$ git merge upstream/master master
+
+# or, better, replay your local work on top of the fetched branch
+# like a "git pull --rebase"
+$ git rebase upstream/master
+
+In addition to VonC's answer, you could tweak it to your liking even further.
+
+After fetching from the remote branch, you would still have to merge the commits. I would replace
+
+$ git fetch upstream
+
+with
+
+$ git pull upstream master
+
+since git pull is essentially git fetch + git merge.
