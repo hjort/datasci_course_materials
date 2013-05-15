@@ -126,3 +126,58 @@ SELECT val AS value
 FROM SimilarityFrequency
 WHERE row = '17035_txt_earn' AND col = '10080_txt_crude';
 
+==========================================================
+
+Resolução Alternativa
+---------------------
+
+
+-- similaridade entre dois documentos
+
+SELECT sum(a.count * b.count) AS similarity
+FROM Frequency AS a
+JOIN (
+  SELECT d.term, c.docid, c.count
+  FROM Frequency AS c
+    JOIN Frequency AS d ON (c.rowid = d.rowid)
+) AS b ON (a.term = b.term)
+WHERE a.docid = '17035_txt_earn'
+  AND b.docid = '10080_txt_crude';
+
+
+-- similaridade de um documento com os demais
+
+SELECT b.docid, sum(a.count * b.count) AS similarity
+FROM Frequency AS a
+JOIN (
+  SELECT d.term, c.docid, c.count
+  FROM Frequency AS c
+    JOIN Frequency AS d ON (c.rowid = d.rowid)
+) AS b ON (a.term = b.term)
+WHERE a.docid = '17035_txt_earn'
+GROUP BY b.docid
+ORDER BY similarity DESC
+LIMIT 15;
+
+==========================================================
+
+INSERT INTO Frequency
+SELECT 'q' as docid, 'washington' as term, 1 as count 
+UNION
+SELECT 'q' as docid, 'taxes' as term, 1 as count
+UNION 
+SELECT 'q' as docid, 'treasury' as term, 1 as count;
+
+SELECT max(similarity)
+FROM (
+  SELECT b.docid, sum(a.count * b.count) AS similarity
+  FROM Frequency AS a
+  JOIN (
+    SELECT d.term, c.docid, c.count
+    FROM Frequency AS c
+      JOIN Frequency AS d ON (c.rowid = d.rowid)
+  ) AS b ON (a.term = b.term)
+  WHERE a.docid = 'q'
+  GROUP BY b.docid
+);
+
