@@ -1,0 +1,41 @@
+-- https://class.coursera.org/datasci-001/forum/thread?thread_id=2121
+
+-- matriz original
+CREATE TABLE f (
+  docid varchar,
+  term varchar,
+  count int,
+  PRIMARY KEY (docid, term)
+);
+
+INSERT INTO f (docid, term, count) VALUES ("doc1", "rogers", 5);
+INSERT INTO f (docid, term, count) VALUES ("doc1", "net", 1);
+INSERT INTO f (docid, term, count) VALUES ("doc2", "rogers", 3);
+INSERT INTO f (docid, term, count) VALUES ("doc3", "net", 1);
+INSERT INTO f (docid, term, count) VALUES ("doc3", "rogers", 1);
+INSERT INTO f (docid, term, count) VALUES ("doc3", "earnings", 1);
+INSERT INTO f (docid, term, count) VALUES ("doc3", "conn", 1);
+
+-- matriz transposta
+CREATE VIEW ft AS
+SELECT b.term, a.docid, a.count
+FROM f AS a
+  JOIN f AS b ON (a.rowid = b.rowid)
+ORDER BY 1, 2;
+
+-- matriz de similaridade
+CREATE VIEW fxft AS
+SELECT a.docid AS row, b.docid AS col, sum(a.count * b.count) AS val
+FROM f AS a
+  JOIN ft AS b ON (a.term = b.term)
+WHERE a.docid != b.docid
+--  AND a.docid < b.docid
+GROUP BY a.docid, b.docid
+ORDER BY 1, 2;
+
+-- exemplo de uso: documentos similares a 'doc1'
+SELECT col AS docid, val AS value
+FROM fxft
+WHERE row = 'doc1'
+ORDER BY val DESC;
+
