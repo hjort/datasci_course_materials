@@ -92,7 +92,7 @@ def read_tweets(fp):
 						if word not in old_dict:
 							if word not in new_dict:
 								new_dict[word] = 0.0
-							new_dict[word] += float(score * 10.0 / word_count)
+							new_dict[word] = (new_dict[word] + float(score * 10.0 / word_count))/2
 							#print "%s = %f" % (word, new_dict[word])
 							#print "%d / %d" % (score, word_count)
 
