@@ -9,7 +9,7 @@ mkdir -p $RESDIR
 # ...
 
 # pairs of "script:data_file"
-SCRIPTS="wordcount:books inverted_index:books join:records"
+SCRIPTS="wordcount:books inverted_index:books join:records friend_count:friends"
 number=0
 
 # run script against the data
