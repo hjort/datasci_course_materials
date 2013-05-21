@@ -15,29 +15,35 @@ mr = MapReduce.MapReduce()
 
 # Part 2: the mapper function tokenizes each document and emits a key-value pair. The key is a word formatted as a string and the value is the integer 1 to indicate an occurrence of word.
 def mapper(record):
-    # key: document identifier
-    # value: document contents
-    key = record[0]
-    value = record[1]
-    words = value.split()
-    for w in words:
-      mr.emit_intermediate(w, 1)
+
+	# key: document identifier
+	key = record[0]
+
+	# value: document contents
+	value = record[1]
+
+	words = value.split()
+	for w in words:
+		mr.emit_intermediate(w, 1)
 
 # Part 3: the reducer function sums up the list of occurrence counts and emits a count for word. Since the mapper function emits the integer 1 for each word, each element in the list_of_values is the integer 1.
 def reducer(key, list_of_values):
-    # key: word
-    # value: list of occurrence counts
-    total = 0
-    for v in list_of_values:
-      total += v
-    # The list of occurrence counts is summed and a (word, total) tuple is emitted where word is a string and total is an integer.
-    mr.emit((key, total))
+
+	# key: word
+	# value: list of occurrence counts
+
+	total = 0
+	for v in list_of_values:
+		total += v
+
+	# The list of occurrence counts is summed and a (word, total) tuple is emitted where word is a string and total is an integer.
+	mr.emit((key, total))
 
 # Do not modify below this line
 # =============================
 
 if __name__ == '__main__':
 
-  # Part 4: the code loads the json file and executes the MapReduce query which prints the result to stdout.
-  inputdata = open(sys.argv[1])
-  mr.execute(inputdata, mapper, reducer)
+	# Part 4: the code loads the json file and executes the MapReduce query which prints the result to stdout.
+	inputdata = open(sys.argv[1])
+	mr.execute(inputdata, mapper, reducer)
