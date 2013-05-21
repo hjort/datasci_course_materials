@@ -5,9 +5,6 @@ import sys
 
 """
 Word Count Example in the Simple Python MapReduce Framework
-
-Usage:
-$ ./wordcount.py data/books.json > results/books.json
 """
 
 # Part 1: we create a MapReduce object that is used to pass data between the map function and the reduce function; you won't need to use this object directly.
