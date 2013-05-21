@@ -30,7 +30,16 @@ function run_it {
 	echo "Running $number: $script $src"
 	python $script $src > $res
 
-	if ! diff $res $sol > /dev/null
+	# measure file size
+	#cres=$(stat -c%s $res)
+	#csol=$(stat -c%s $sol)
+
+	# count the words
+	wres=$(wc -w $res | cut -d' ' -f1)
+	wsol=$(wc -w $sol | cut -d' ' -f1)
+
+	#if ! diff $res $sol > /dev/null
+	if [ $wres -ne $wsol ]
 	then
 		echo "Wrong results..."
 	else
