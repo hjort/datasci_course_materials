@@ -6,14 +6,13 @@ RESDIR="results"	# results directory
 rm -rf $RESDIR
 mkdir -p $RESDIR
 
-# ...
-
-# pairs of "script:data_file"
-SCRIPTS="wordcount:books inverted_index:books join:records friend_count:friends"
+# pairs of "script_name:input_data_file"
+SCRIPTS="wordcount:books inverted_index:books join:records friend_count:friends asymmetric_friendships:friends"
 number=0
 
 # run script against the data
 function run_it {
+
 	name=$(basename $script .py)
 	echo
 
@@ -47,6 +46,7 @@ function run_it {
 	fi
 }
 
+# run and check the scripts for each assigned problem
 for pair in $SCRIPTS
 do
 	script=`echo $pair | cut -d: -f1`.py
