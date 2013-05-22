@@ -7,7 +7,7 @@ rm -rf $RESDIR
 mkdir -p $RESDIR
 
 # pairs of "script_name:input_data_file"
-SCRIPTS="wordcount:books inverted_index:books join:records friend_count:friends asymmetric_friendships:friends"
+SCRIPTS="wordcount:books inverted_index:books join:records friend_count:friends asymmetric_friendships:friends unique_trims:dna"
 number=0
 
 # run script against the data
