@@ -46,43 +46,27 @@ count_by_subject = FOREACH subjects GENERATE FLATTEN($0), COUNT($1) AS count PAR
 DESCRIBE count_by_subject; -- count_by_subject: {group: chararray,count: long}
 ILLUSTRATE count_by_subject;
 
-/*
-grunt> a = count_by_subject;                                                
-grunt> describe a;
-a: {group: chararray,count: long}
+-- a scatter-plot of this histogram
+nums_by_count = GROUP count_by_subject BY (count) PARALLEL 50;
+scatter_plot = FOREACH nums_by_count GENERATE group AS x, COUNT($1) AS y;
 
-grunt> b = FOREACH a GENERATE count, 1 AS one;
-grunt> describe b;
-b: {count: long,one: int}
-
-c = GROUP b BY (count);
-d = FOREACH c GENERATE count, COUNT(*);
-
-c = FOREACH b GENERATE COUNT(group);
-describe c;
-*/
-
-b = GROUP a BY (count);
-c = FOREACH b GENERATE group, SUM(a.count);
-
-
---subjects_by_counts = GROUP count_by_subject BY (count) PARALLEL 50;
-subjects_by_counts = FOREACH count_by_subject GENERATE COUNT (group);
-DESCRIBE subjects_by_counts;
-ILLUSTRATE subjects_by_counts;
+ILLUSTRATE scatter_plot;
+DESCRIBE nums_by_count;
+DESCRIBE scatter_plot;
 
 -- based on http://stackoverflow.com/questions/9900761/pig-how-to-count-a-number-of-rows-in-alias
-cbo_group = GROUP count_by_object ALL;
-cbo_count = FOREACH cbo_group GENERATE COUNT (count_by_object);
+sp_group = GROUP scatter_plot ALL;
+sp_count = FOREACH sp_group GENERATE COUNT (scatter_plot);
 
---DESCRIBE cbo_group; -- cbo_group: {group: chararray,count_by_object: {(group: chararray,count: long)}}
---DESCRIBE cbo_count; -- cbo_count: {long}
+ILLUSTRATE sp_count;
+DESCRIBE sp_group; -- sp_group: {group: chararray,scatter_plot: {(x: long,y: long)}}
+DESCRIBE sp_count; -- sp_count: {long}
 
 --order the resulting tuples by their count in descending order
 --count_by_object_ordered = ORDER count_by_object BY (count) PARALLEL 50;
 
 -- store the results in the folder /user/hadoop/example-results
-STORE cbo_count INTO 'problem2a';
+STORE sp_count INTO 'problem2a';
 --store count_by_object_ordered into '/user/hadoop/example-results' using PigStorage();
 -- alternatively, you can store the results in S3, see instructions:
 --store count_by_object_ordered into 's3n://superman/example-results';
