@@ -20,42 +20,44 @@ What you need to turn in:
 How many records are there in count_by_object?
 */
 
-REGISTER s3n://uw-cse-344-oregon.aws.amazon.com/myudfs.jar
+REGISTER myudfs.jar
+--REGISTER s3n://uw-cse-344-oregon.aws.amazon.com/myudfs.jar
 
 -- load the test file into Pig
-raw = LOAD 's3n://uw-cse-344-oregon.aws.amazon.com/cse344-test-file' USING TextLoader AS (line:chararray);
+raw = LOAD 'cse344-test-file' USING TextLoader AS (line:chararray);
+--raw = LOAD 's3n://uw-cse-344-oregon.aws.amazon.com/cse344-test-file' USING TextLoader AS (line:chararray);
 -- later you will load to other files, example:
 --raw = LOAD 's3n://uw-cse-344-oregon.aws.amazon.com/btc-2010-chunk-000' USING TextLoader AS (line:chararray); 
-DESCRIBE raw; -- raw: {line: chararray}
+--DESCRIBE raw; -- raw: {line: chararray}
 
 -- parse each line into ntriples
 ntriples = FOREACH raw GENERATE FLATTEN(myudfs.RDFSplit3(line)) AS (subject:chararray, predicate:chararray, object:chararray);
-DESCRIBE ntriples; -- ntriples: {subject: chararray,predicate: chararray,object: chararray}
+--DESCRIBE ntriples; -- ntriples: {subject: chararray,predicate: chararray,object: chararray}
 
 -- group the n-triples by object column
 objects = GROUP ntriples BY (object) PARALLEL 50;
-DESCRIBE objects;
+--DESCRIBE objects;
 -- objects: {group: chararray,ntriples: {(subject: chararray,predicate: chararray,object: chararray)}}
 
 -- flatten the objects out (because group by produces a tuple of each object
 -- in the first column, and we want each object ot be a string, not a tuple),
 -- and count the number of tuples associated with each object
 count_by_object = FOREACH objects GENERATE FLATTEN($0), COUNT($1) AS count PARALLEL 50;
-DESCRIBE count_by_object; -- count_by_object: {group: chararray,count: long}
+--DESCRIBE count_by_object; -- count_by_object: {group: chararray,count: long}
 
 -- based on http://stackoverflow.com/questions/9900761/pig-how-to-count-a-number-of-rows-in-alias
 cbo_group = GROUP count_by_object ALL;
 cbo_count = FOREACH cbo_group GENERATE COUNT (count_by_object);
 
-DESCRIBE cbo_group; -- cbo_group: {group: chararray,count_by_object: {(group: chararray,count: long)}}
-DESCRIBE cbo_count; -- cbo_count: {long}
+--DESCRIBE cbo_group; -- cbo_group: {group: chararray,count_by_object: {(group: chararray,count: long)}}
+--DESCRIBE cbo_count; -- cbo_count: {long}
 
 --order the resulting tuples by their count in descending order
 --count_by_object_ordered = ORDER count_by_object BY (count) PARALLEL 50;
 
--- store the results in the folder /user/hadoop/example-results
+-- store the results
+STORE count_by_object INTO 'problem1/result'; 
+STORE cbo_count INTO 'problem1/count';
 --store count_by_object_ordered into '/user/hadoop/example-results' using PigStorage();
--- alternatively, you can store the results in S3, see instructions:
---store count_by_object_ordered into 's3n://superman/example-results';
-STORE cbo_count INTO 's3n://hjort-mapreduce/problem1';
+--STORE cbo_count INTO 's3n://hjort-mapreduce/problem1';
 
