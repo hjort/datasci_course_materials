@@ -49,3 +49,26 @@ STORE counted INTO 'problem3/count';
 --store count_by_object_ordered into '/user/hadoop/example-results' using PigStorage();
 --STORE cbo_count INTO 's3n://hjort-mapreduce/problem2a';
 
+/*
+REGISTER s3n://uw-cse-344-oregon.aws.amazon.com/myudfs.jar
+
+raw = LOAD 's3n://uw-cse-344-oregon.aws.amazon.com/btc-2010-chunk-000' USING TextLoader AS (line:chararray); 
+
+ntriples = FOREACH raw GENERATE FLATTEN(myudfs.RDFSplit3(line)) AS (subject:chararray, predicate:chararray, object:chararray);
+
+filtered = FILTER ntriples BY subject MATCHES '.*business.*';
+
+filtered2 = FOREACH filtered GENERATE * AS (subject2:chararray, predicate2:chararray, object2:chararray);
+
+joined = JOIN filtered BY subject, filtered2 BY subject2 PARALLEL 50;
+
+result = DISTINCT joined PARALLEL 50;
+
+grouped = GROUP result ALL;
+counted = FOREACH grouped GENERATE COUNT (result);
+
+STORE result INTO 's3n://hjort-mapreduce/problem3/result';
+STORE counted INTO 's3n://hjort-mapreduce/problem3/count';
+*/
+
+-- hadoop fs -getmerge s3n://hjort-mapreduce/problem3/result/ problem3-results.txt

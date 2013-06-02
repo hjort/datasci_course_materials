@@ -61,5 +61,28 @@ sp_count = FOREACH sp_group GENERATE COUNT (scatter_plot);
 STORE scatter_plot INTO 'problem2/result';
 STORE sp_count INTO 'problem2/count';
 --store count_by_object_ordered into '/user/hadoop/example-results' using PigStorage();
---STORE cbo_count INTO 's3n://hjort-mapreduce/problem2a';
+--STORE scatter_plot INTO 's3n://hjort-mapreduce/problem2/result';
+--STORE sp_count INTO 's3n://hjort-mapreduce/problem2/count';
 
+/*
+REGISTER s3n://uw-cse-344-oregon.aws.amazon.com/myudfs.jar
+
+raw = LOAD 's3n://uw-cse-344-oregon.aws.amazon.com/btc-2010-chunk-000' USING TextLoader AS (line:chararray); 
+
+ntriples = FOREACH raw GENERATE FLATTEN(myudfs.RDFSplit3(line)) AS (subject:chararray, predicate:chararray, object:chararray);
+
+subjects = GROUP ntriples BY (subject) PARALLEL 50;
+
+count_by_subject = FOREACH subjects GENERATE FLATTEN($0), COUNT($1) AS count PARALLEL 50;
+
+nums_by_count = GROUP count_by_subject BY (count) PARALLEL 50;
+scatter_plot = FOREACH nums_by_count GENERATE group AS x, COUNT($1) AS y;
+
+sp_group = GROUP scatter_plot ALL;
+sp_count = FOREACH sp_group GENERATE COUNT (scatter_plot);
+
+STORE scatter_plot INTO 's3n://hjort-mapreduce/problem2/result';
+STORE sp_count INTO 's3n://hjort-mapreduce/problem2/count';
+*/
+
+-- hadoop fs -getmerge s3n://hjort-mapreduce/problem2/result/ problem2-results.txt
