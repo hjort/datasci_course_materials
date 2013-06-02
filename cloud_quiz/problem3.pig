@@ -56,13 +56,13 @@ raw = LOAD 's3n://uw-cse-344-oregon.aws.amazon.com/btc-2010-chunk-000' USING Tex
 
 ntriples = FOREACH raw GENERATE FLATTEN(myudfs.RDFSplit3(line)) AS (subject:chararray, predicate:chararray, object:chararray);
 
-filtered = FILTER ntriples BY subject MATCHES '.*business.*';
+filtered = FILTER ntriples BY subject MATCHES '.*rdfabout\\.com.*';
 
 filtered2 = FOREACH filtered GENERATE * AS (subject2:chararray, predicate2:chararray, object2:chararray);
 
-joined = JOIN filtered BY subject, filtered2 BY subject2 PARALLEL 50;
+joined = JOIN filtered BY object, filtered2 BY subject2 PARALLEL 10;
 
-result = DISTINCT joined PARALLEL 50;
+result = DISTINCT joined PARALLEL 10;
 
 grouped = GROUP result ALL;
 counted = FOREACH grouped GENERATE COUNT (result);
